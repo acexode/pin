@@ -10,6 +10,7 @@ const express = require('express'),
     db = require('monk')('localhost/pin'),
     multer = require('multer'),
     flash = require('connect-flash'),
+    exphbs = require('express-handlebars'),
 
     index = require('./routes/index'),
     users = require('./routes/users');
@@ -17,8 +18,8 @@ const express = require('express'),
 var app = express();
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
+app.set('view engine', 'handlebars');
 
 // uploads files
 const upload = multer({ dest: './public/images/uploads' })
