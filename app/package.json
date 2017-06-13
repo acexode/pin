@@ -1,0 +1,25 @@
+{
+  "name": "pin",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "body-parser": "*",
+    "cookie-parser": "*",
+    "debug": "*",
+    "express": "*",
+    "jade": "*",
+    "morgan": "*",
+    "serve-favicon": "*"
+  },
+  "description": "pin blog",
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "(https://github.com/acexode/pin)"
+  },
+  "author": "Acexode",
+  "license": "ISC"
+}
