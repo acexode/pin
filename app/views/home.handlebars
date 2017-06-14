@@ -1,4 +1,29 @@
 <br>
+<div class="header">
+      <h1>My Blog Post</h1>
+  </div>
 <div class="row">
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam architecto quia laboriosam ipsa. Deleniti provident ad esse iusto nostrum sapiente, dolores eligendi. Tempora explicabo consequuntur deleniti, assumenda possimus temporibus dicta.</p>
+  
+  <div class="col-md-8 main">
+   {{#if posts}}
+      {{#each posts}}
+        <div class="post">
+          <img src="https://images.pexels.com/photos/414831/pexels-photo-414831.jpeg?h=350&auto=compress&cs=tinysrgb" alt="">
+        <div class="post-body">
+          <h2 class="blog-post-title"><a href="/post/show/{{_id}}">{{title}}</a></h2>
+          <p class="blog-post-meta">
+            posted in {{category}} 
+            {{#formatDate}}
+              {{date}}
+            {{/formatDate}} by <a href="#">{{author}}</a></p>
+          
+          <p>{{body}}</p>
+          <a href="/post/show/{{_id}}" class="btn btn-default readmore">Read More</a>
+        </div>
+      </div>
+      {{/each}}
+    {{/if}}
+      
+  </div>
+  
 </div>

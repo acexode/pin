@@ -11,20 +11,35 @@ const express = require('express'),
     multer = require('multer'),
     flash = require('connect-flash'),
     exphbs = require('express-handlebars'),
-
+    moment = require('moment'),
     index = require('./routes/index'),
-    users = require('./routes/users');
+    post = require('./routes/post');
 
 var app = express();
 
 // view engine setup
-app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
+exphbs.registerHelper
+hbsEngine = exphbs.create({
+    extname: 'handlebars',
+    defaultLayout: 'main.handlebars',
+    helpers: {
+        formatDate: function(date, format) {
+            return moment(date).format("MM-DD-Y");
+        }
+    }
+});
+//app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
+//app.set('view engine', 'handlebars');
+app.engine('handlebars', hbsEngine.engine);
 app.set('view engine', 'handlebars');
 
 // uploads files
 const upload = multer({ dest: './public/images/uploads' })
-    // uncomment after placing your favicon in /public
-    //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+
+//moment 
+//app.locals.moment = require('moment')
+// uncomment after placing your favicon in /public
+//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -64,13 +79,14 @@ app.use(function(req, res, next) {
 });
 // db
 app.use(function(req, res, next) {
-    res.db = db;
+    req.db = db;
+
     next();
 });
 
 
 app.use('/', index);
-app.use('/users', users);
+app.use('/posts', post);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
